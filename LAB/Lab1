@@ -1,1 +1,47 @@
+/* in java */
+public class Lab1 {
+    public static int[] mySolution(int[] nums, int target) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {0, 4, 5, 6, 9, 11, 15, 19};
+        int target = 30;
+        int[] solution = mySolution(nums, target);
+        if (solution != null) {
+            System.out.println("The solution are: " + "index of " + solution[0] + " & " + solution[1]);
+        } else {
+            System.out.println("No result");
+        }
+    }
+}
+
+
+
+/* In python */
+def my_solution(nums, target):
+    for i in range(len(nums) - 1):
+        for j in range(i + 1, len(nums)):
+            if nums[i] + nums[j] == target:
+                return [i, j]
+    return None
+
+def main():
+    nums = [0, 4, 5, 6, 9, 11, 15, 19]
+    target = 30
+    solution = my_solution(nums, target)
+    if solution is not None:
+        print("The solution are:", "index of " + str(solution[0]) + "& " + str(solution[1]))
+    else:
+        print("No result")
+
+main()
+
 

@@ -43,5 +43,20 @@ def main():
         print("No result")
 
 main()
+*********************************************************************
+The following high-level approach was used:
 
+1. **Nested Loop**: 
+   - The code uses a nested loop to iterate through each pair of elements in the nums array.
 
+2. **Sum Check**:
+   - For each pair of elements (nums[i], nums[j]), where i and j are the loop indices,
+the code checks if their sum equals the target value.
+   
+3. **Return Solution**:
+   - If a pair of elements is found such that their sum equals the target value, 
+the indices of these elements are returned as an array int[]{i, j}.
+   
+4. **No Solution Case**:
+   - If no such pair is found after iterating through all possible pairs, 
+the function returns `null` to indicate that there is no solution.

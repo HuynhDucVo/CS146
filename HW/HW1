@@ -21,7 +21,6 @@ public class HW1 {
         return false;
     }
 
-
     public static void main(String[] ags) {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter your String: ");
@@ -30,3 +29,41 @@ public class HW1 {
     }
 }
 
+// In python
+def to_words(s):
+    s = s.lower()
+    result = ""
+    for char in s:
+        if not char.isdigit():
+            result += char
+    return result
+
+def is_palindrome(s):
+    s = to_words(s)
+    reverse = s[::-1]
+    return s == reverse
+
+if __name__ == "__main__":
+    user_input = input("Enter your String: ")
+    print(is_palindrome(user_input))
+*********************************
+## High-Level Approach
+
+### 1. Conversion to Lowercase
+- In the toWords function, the input string is converted 
+to lowercase using the lower() method in Python.
+
+### 2. Removing Non-Alphabetic Characters
+- A loop iterates through each character in the string, excluding digits using the isdigit() method.
+- Non-digit characters are appended to the result string.
+
+### 3. Palindrome Check
+- The isPalindrome function uses the toWords function to obtain the cleaned string.
+- The cleaned string is reversed using Python's slicing ([::-1]) and stored in the reverse variable.
+- The function returns True if the cleaned string is equal to its reverse, indicating a palindrome.
+
+### 4. User Input
+- The input() function is used to get a string input from the user.
+
+### 5. Output
+- The result of the palindrome check is printed to the console.

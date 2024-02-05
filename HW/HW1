@@ -47,23 +47,23 @@ if __name__ == "__main__":
     user_input = input("Enter your String: ")
     print(is_palindrome(user_input))
 *********************************
-## High-Level Approach
 
-### 1. Conversion to Lowercase
-- In the toWords function, the input string is converted 
-to lowercase using the lower() method in Python.
+# High-Level Approach for Palindrome Check
 
-### 2. Removing Non-Alphabetic Characters
-- A loop iterates through each character in the string, excluding digits using the isdigit() method.
-- Non-digit characters are appended to the result string.
+## 1. String Normalization
+- The input string is converted to lowercase to ensure 
+a case-insensitive comparison.
 
-### 3. Palindrome Check
-- The isPalindrome function uses the toWords function to obtain the cleaned string.
-- The cleaned string is reversed using Python's slicing ([::-1]) and stored in the reverse variable.
-- The function returns True if the cleaned string is equal to its reverse, indicating a palindrome.
+## 2. Removing Non-Alphabetic Characters
+- A loop iterates through each character in the string.
+- Non-alphabetic characters, such as digits, are excluded
+from further consideration.
 
-### 4. User Input
-- The input() function is used to get a string input from the user.
+## 3. Palindrome Check
+- The cleaned string is reversed.
+- The program checks if the cleaned string is equal to its reverse,
+indicating a palindrome.
 
-### 5. Output
-- The result of the palindrome check is printed to the console.
+## 4. User Interaction
+- The user is prompted to input a string.
+

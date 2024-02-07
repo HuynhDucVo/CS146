@@ -1,23 +1,30 @@
 // In java
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class HW2 {
-    public static int isBadVersion(ArrayList<Double> sample) {
-        int count = 0;
+    public static boolean isBadVersion(double n) {
+        return n > 0.8;
+    }
+
+    public static int findFirstBadVersion(ArrayList<Double> sample) {
         for (int i = 0; i < sample.size(); i++) {
-            if (sample.get(i) == 1.0) {
-                count++;
-                break;
-            } else count++;
+            if (isBadVersion(sample.get(i))) {
+                return i + 2;
+            }
         }
-        return count;
+        return -1;
     }
 
     public static void main(String[] args) {
         ArrayList<Double> sample = new ArrayList<>();
 
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter your number of product: ");
+        int n = input.nextInt();
         double product = 0;
-        for (int i = 1; i < 20; i++) {
+        for (int i = 1; i < n; i++) {
             if (product < 0.8) {
                 product = Math.random();
                 sample.add(product);
@@ -26,13 +33,78 @@ public class HW2 {
                 sample.add(1.0);
             }
         }
+
+        System.out.println("Versions:");
         for (int i = 0; i < sample.size(); i++) {
             System.out.print(sample.get(i) + " ");
         }
-
         System.out.println();
-        System.out.println(isBadVersion(sample));
+
+        int firstBadVersion = findFirstBadVersion(sample);
+        if (firstBadVersion != -1) {
+            System.out.println("The first bad version is: " + firstBadVersion);
+        } else {
+            System.out.println("No bad version found.");
+        }
     }
 }
 
+// In python
+
+import random
+
+def is_bad_version(version):
+    return version > 0.8
+
+def find_first_bad_version(sample):
+    for i in range(len(sample)):
+        if is_bad_version(sample[i]):
+            return i + 2
+    return -1
+
+if __name__ == "__main__":
+    sample = []
+
+    n = int(input("Enter your number of product: "))
+    product = 0
+    for i in range(1, n):
+        if product < 0.8:
+            product = random.random()
+            sample.append(product)
+        else:
+            sample.append(1.0)
+
+    print("Versions:")
+    for version in sample:
+        print(version, end=" ")
+    print()
+
+    first_bad_version = find_first_bad_version(sample)
+    if first_bad_version != -1:
+        print("The first bad version is:", first_bad_version)
+    else:
+        print("No bad version found.")
+******************************************************************
+
+### High-Level Approach Explanation
+
+1. Defining the Rule for Bad Versions:
+- The code defines a rule for identifying bad versions using the `isBadVersion` method.
+- In this code, versions with values greater than 0.8 are considered bad.
+
+2. Generating Product Versions:
+- The code prompts the user to input the number of product versions (`n`).
+- It generates a list of product versions based on the defined rule for bad versions:
+  - If the randomly generated product value is less than 0.8, it's added to the list.
+  - Otherwise, a bad version with a value of 1.0 is added to the list.
+
+3. Searching for the First Bad Version:
+- The `findFirstBadVersion` method iterates through the list of product versions to find the first bad version.
+- It utilizes the `isBadVersion` method to determine if a version is bad.
+- If a bad version is found, its index plus 2 (due to 0-based indexing) is returned as the first bad version.
+- If no bad version is found, -1 is returned.
+
+4. Outputting Results:
+- The code outputs the generated list of product versions to the console.
+- It then displays the index of the first bad version if found, or a message indicating that no bad version was found.
 

@@ -1,1 +1,76 @@
+// Problem 1
+public class HW3 {
+    public static void insertionSort(int[] array) {
+        for (int i = 1; i < array.length; i++) {
+            int key = array[i];
+            int j = i - 1;
+            while (j >= 0 && array[j] > key) {
+                array[j + 1] = array[j];
+                j--;
+            }
+            array[j + 1] = key;
+        }
+    }
 
+    public static void main(String[] args) {
+        int[] array = {0, 3, 4, 1, 5, 7, 9, 6};
+        insertionSort(array);
+        for (int i : array) {
+            System.out.print(i + " ");
+        }
+    }
+}
+***************************************
+Time Complexity:
+Best Case: O(n)
+
+Occurs when the array is already sorted. In this case, no element needs to be moved, and the inner loop doesn't execute.
+Worst Case: O(n^2)
+
+Occurs when the array is sorted in reverse order. In each iteration, every element must be moved to the beginning of the array.
+Average Case: O(n^2)
+
+On average, each element will have to be moved approximately half of the positions to the right.
+****************************************
+
+//Problem 2
+public class HW3 {
+    public static int[][] mulMatrix(int[][] A, int[][] B) {
+        int row_A = A.length;
+        int column_A = A[0].length;
+        int row_B = B.length;
+        int column_B = B[0].length;
+        int[][] result = new int[row_A][row_B];
+
+        for (int i = 0; i < row_A; i++) {
+            for (int j = 0; j < column_B; j++) {
+                int sum = 0;
+                for (int k = 0; k < column_A; k++) {
+                    sum += A[i][k] * B[k][j];
+                }
+                result[i][j] = sum;
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[][] A = {{3, 7}, {4, 9}};
+        int[][] B = {{6, 2}, {5, 8}};
+
+        int[][] result = mulMatrix(A, B);
+
+        for (int[] i : result) {
+            for (int j : i) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+******************************************
+Time Complexity:
+Overall Time Complexity: O(m * p * n)
+The time complexity of matrix multiplication using this algorithm is directly proportional to the number of rows and columns in the matrices involved.
+It's a cubic time complexity algorithm due to the three nested loops.
+This algorithm is efficient for small matrices but becomes inefficient for larger matrices due to its cubic time complexity.

@@ -70,6 +70,10 @@ public class HW3 {
 }
 ******************************************
 Time Complexity:
+m: outer loop
+p: middle loop
+n: inner loop
+
 Overall Time Complexity: O(m * p * n)
 The time complexity of matrix multiplication using this algorithm is directly proportional to the number of rows and columns in the matrices involved.
 It's a cubic time complexity algorithm due to the three nested loops.

@@ -1,1 +1,32 @@
+//Problem 1: Insertion Sort Time Complexity
 
+The best-case scenario occurs when the input array is already sorted. In this case, the inner loop will iterate only once for each element, and no element will need to be shifted.
+Time Complexity: O(n)
+Reasoning: Each element only requires comparison with the previous element once. No elements need to be shifted as they are already in their correct positions.
+Average Case:
+
+In the average case, we expect the input array to be somewhat randomized or partially sorted.
+Time Complexity: O(n^2)
+Reasoning: For each element, on average, it will need to be compared with half of the already sorted elements. This results in approximately n^2/4 comparisons on average, which simplifies to O(n^2).
+Worst Case:
+
+The worst-case scenario for insertion sort occurs when the input array is in reverse order, requiring the maximum number of comparisons and element shifts.
+Time Complexity: O(n^2)
+Reasoning: In the worst case, each element will need to be compared with all the previous elements in the sorted portion of the array, resulting in approximately n^2/2 comparisons and shifts, simplifying to O(n^2).
+
+********************************************************************************************************************************
+//Problem 2: Matrix Multiplication Time Complexity
+
+There is no particular best-case scenario for matrix multiplication. Regardless of the input matrices, the algorithm must perform the same number of operations.
+Time Complexity: O(rows_A * cols_A * cols_B)
+Reasoning: In matrix multiplication, each element of the resulting matrix is calculated as the sum of products of corresponding elements from the respective rows and columns of the input matrices. This requires iterating over the rows and columns of the input matrices, resulting in a time complexity proportional to the number of operations performed, which is rows_A * cols_A * cols_B.
+Average Case:
+
+Similar to the best case, there isn't a distinct average case scenario. The number of operations performed remains the same regardless of the input matrices.
+Time Complexity: O(rows_A * cols_A * cols_B)
+Reasoning: The reasoning is the same as in the best case.
+Worst Case:
+
+The worst-case scenario occurs when the input matrices are both large and have similar dimensions, resulting in a larger number of operations.
+Time Complexity: O(rows_A * cols_A * cols_B)
+Reasoning: As with the other cases, the time complexity remains the same, as the number of operations is directly proportional to the dimensions of the input matrices.

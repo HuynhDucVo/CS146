@@ -1,1 +1,39 @@
+// In java
+public class EC {
+    public static int fibonacciNth(int n) {
+        if (n <= 1) return n;
 
+        int pre2 = 0;
+        int pre1 = 1;
+        int cur = 0;
+
+        for (int i = 1; i < n; i++) {
+            cur = pre1 + pre2;
+            pre2 = pre1;
+            pre1 = cur;
+        }
+        return cur;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(fibonacciNth(7));
+    }
+}
+
+// In python
+def fibonacci_nth(n):
+    if n <= 1:
+        return n
+
+    pre2 = 0
+    pre1 = 1
+    cur = 0
+
+    for i in range(1, n):
+        cur = pre1 + pre2
+        pre2 = pre1
+        pre1 = cur
+
+    return cur
+
+print(fibonacci_nth(7))

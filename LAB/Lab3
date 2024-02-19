@@ -1,1 +1,28 @@
+//Problem 1:
 
+1) 10000000000*n^2 vs n^3
+  ===> n^3 >
+2) n^2*log(n)       vs   n(log(n))^10
+log(n^2*log(n))          log(n(log(n))^10)
+log(n^2) + log(logn)     logn + log(log(n)^10)
+2log(n)  + log(logn)     log(n) + 10log(logn)
+2log(n)                  logn + 
+===> n^2*logn >
+
+3) n^logn          vs    2^(sqrt(n))
+log(n^logn)              log(2^sqrt*n)
+logn * logn              sqrt(n) * log2
+log(logn*logn)           log(sqrt(n) * log2)
+2log(logn)               1/2 * log(n) + log(log2)
+===> 2^(sqrt(n) >
+
+4) 2^n vs 2^2n
+==> 2^2n >
+
+//Problem 2:
+Best case: O(1) when n is 2, 3, or any even number greater than 2
+Worst case: O(sqrt(n)) when n is prime or a product of large primes, requiring iteration up to sqrt(n)
+Average case: O(sqrt(n)) considering a random large n, although precise average-case analysis may vary based on the distribution of the inputs.
+The time complexity of the isPrime(n) function, in terms of big O notation, is O(sqrt(n))  This reflects the worst-case scenario where n is prime, and the algorithm must iterate through all numbers up to sqrt(n) to verify its primality. 
+The best case, when n is 2 (the smallest prime number) or any even number (which is immediately identified as non-prime), is O(1), 
+but when discussing time complexity in terms of big O notation, we focus on the worst-case scenario unless otherwise specified.

@@ -1,4 +1,7 @@
-//Problem 1:
+//Problem 1: Decreasing function: 
+T(N) = aT(N-b) + f(n)
+T(N) = aT(N/b) + f(n)
+
 
 1) T(N) = 2T(N-1) + 1
 It doesn't fit the master theorem ==> using recursion tree method. 
@@ -10,14 +13,28 @@ The sum of costs from level 0 to N−1 is:
 ==> T(N) = 1 + 2 + 2^2 + ... + 2^(N-1) = 2^N -1
 
 2) T(N) = 3T(N-1) + n
+a = 3, b = 1, f(n) = n ==> k = 1
+a > 1 ==> T(n) = O(n^k*a^(n/b)) = O(n * 3^n)
 
-3) T(N) = 9T(N/2) + n2
+3) T(N) = 9T(N/2) + n^2
+a = 9, b = 2, f(n) = n^2
+logb(a) = log2(9) = 3
+f(n) = n^2 && logb(a) = log2(9) > 2 ==> f(n) = theta(n^(logb(a)-e)) = theta(n^(log2(9) - e)) vs e > 0
+==> T(n) = theta(n^(logb(a)) = theta(n^(log2(9)))
 
-4) T(N) = 100T(N/2) + nlog2cn + 1  (c is a constant)
+4) T(N) = 100T(N/2) + n^(log2cn + 1)  (c is a constant)
+a = 100, b = 2, f(n) = n^(log2(cn) + 1) = n^(log2(cn) + log2(2)) = n^(log2(2cn))
+logb(a) = log2(100), log2(2cn) slightly greater than 100 then f(n) = omega(n^(logb(a) + e)) 
+==> T(n) = theta(f(n)) = theta(n^(log2(2cn)))
 
-5) T(N) = 4T(N/2) + n2logn
+5) T(N) = 4T(N/2) + n^2*log(n)
+a = 4, b = 2, f(n) = n^2*log(n)
+logb(a) = 2 ==> f(n) = theta(n^(logb(a))*log^k(n)) vs k = 1
+==> T(n) = theta(n^2*log^2(n))
 
-6) T(N) = 5T(N/2) + n2/logn
+6) T(N) = 5T(N/2) + n^2/logn
+a = 5, b =2, f(n) = n^2/logn
+logb(a) = log2(5)  
 
 //Problem 2:
 The loop running 10n times corresponds to a linear operation for each function call, contributing O(10n) or simply O(n) complexity for each invocation of the function.
@@ -25,6 +42,7 @@ After the loop, the function makes two recursive calls with n/2 as the argument 
 Thus, the recurrence relation that represents the time complexity of yetAnotherFunc(n) can be expressed as:
 T(n) = 2T(n/2) + O(n)
 where a = 2, b = 2, f(n) = O(n) 
-a,b >= 1 the f(n) = theta(n^(logb(a)-e)*log^k(n)) = theta(n^(1-e) * log^k(n)), but f(n) = O(n) ===> e = 0; k = 0
-then T(n) = theta(n^(logb(a)-e)*log^(k+1)(n)) = theta(n*logn)
+a,b >= 1 && logb(a) = 1 ==> f(n) = theta(n^(logb(a))*log^k(n)) = theta(n * log^k(n)), but f(n) = O(n) ===> k = 0
+then T(n) = theta(n^(logb(a))*log^(k+1)(n)) = theta(n*logn)
+
 Thus the given recurrence relation: T(n) = theta(n*logn)

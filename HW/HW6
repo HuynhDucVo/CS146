@@ -1,1 +1,37 @@
+// In java:
+import java.util.*;
 
+public class HW6 {
+    public static List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                for (int k = j + 1; k < nums.length; k++) {
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+                        ArrayList<Integer> newList = new ArrayList<>();
+                        newList.add(nums[i]);
+                        newList.add(nums[j]);
+                        newList.add(nums[k]);
+                        result.add(newList);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 3, -2, 4, -5, 1, 5, 7, -8, 10};
+        List<List<Integer>> result = new ArrayList<>();
+
+        result = threeSum(nums);
+        for (List<Integer> i : result) {
+            for (int j : i) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+        }
+    }
+}

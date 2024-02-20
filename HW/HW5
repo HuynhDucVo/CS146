@@ -11,6 +11,7 @@ This pattern continues, with each level i contributing 2^i to the total
 The depth of the tree is N, as each level decreases the problem size by 1, and the total cost is the sum of the costs at each level.
 The sum of costs from level 0 to N−1 is:
 ==> T(N) = 1 + 2 + 2^2 + ... + 2^(N-1) = 2^N -1
+==> T(n) = O(2^n)
 
 2) T(N) = 3T(N-1) + n
 a = 3, b = 1, f(n) = n ==> k = 1

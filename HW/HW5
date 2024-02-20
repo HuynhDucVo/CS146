@@ -35,7 +35,7 @@ logb(a) = 2 ==> f(n) = theta(n^(logb(a))*log^k(n)) vs k = 1
 
 6) T(N) = 5T(N/2) + n^2/logn
 a = 5, b =2, f(n) = n^2/logn
-logb(a) = log2(5)  
+f(n) = n^2 * log^(-1)(n) --> k <0 ==> do not applied
 
 //Problem 2:
 The loop running 10n times corresponds to a linear operation for each function call, contributing O(10n) or simply O(n) complexity for each invocation of the function.

@@ -1,37 +1,66 @@
 // In java:
-import java.util.*;
 
-public class HW6 {
+import java.util.*;
+public class test {
     public static List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
+        Set<List<Integer>> resultSet = new HashSet<>();
 
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
                 for (int k = j + 1; k < nums.length; k++) {
                     if (nums[i] + nums[j] + nums[k] == 0) {
-                        ArrayList<Integer> newList = new ArrayList<>();
-                        newList.add(nums[i]);
-                        newList.add(nums[j]);
-                        newList.add(nums[k]);
-                        result.add(newList);
+                        List<Integer> newList = Arrays.asList(nums[i], nums[j], nums[k]);
+                        Collections.sort(newList);
+                        resultSet.add(newList);
                     }
                 }
             }
         }
 
-        return result;
+        return new ArrayList<>(resultSet);
     }
+***************************************************************
+# ThreeSum Algorithm Approach:
+1. Initialize a Set: A `HashSet` is used to store unique triplets, automatically handling the elimination of duplicates. 
+Each triplet is sorted before being added to ensure that identical triplets with different element orders are not considered unique.
 
-    public static void main(String[] args) {
-        int[] nums = {2, 3, -2, 4, -5, 1, 5, 7, -8, 10};
-        List<List<Integer>> result = new ArrayList<>();
+2. Triple Nested Loops: The algorithm iterates through the array using three nested loops to consider every possible triplet combination. 
+This exhaustive search guarantees that no potential triplet is missed.
 
-        result = threeSum(nums);
-        for (List<Integer> i : result) {
-            for (int j : i) {
-                System.out.print(j + " ");
-            }
-            System.out.println();
-        }
-    }
-}
+3. Check Sum: For each triplet, it checks if the sum equals zero. 
+If it does, the triplet is sorted and added to the set to maintain uniqueness.
+
+4. Conversion to List: Finally, the set of unique triplets is converted back into a list and returned as the final result.
+***************************************************************
+
+// In python: 
+
+from typing import List
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        result_set = set()
+        
+        for i in range(len(nums)):
+            for j in range(i + 1, len(nums)):
+                for k in range(j + 1, len(nums)):
+                    if nums[i] + nums[j] + nums[k] == 0:
+                        new_list = sorted([nums[i], nums[j], nums[k]])
+                        result_set.add(tuple(new_list))  
+        
+        return [list(item) for item in result_set]  
+
+*****************************************************************
+# ThreeSum Algorithm Enhancement
+
+- Initial Step: The input array is sorted. This simplification aids in the subsequent steps by allowing for efficient duplicate avoidance and simplifying the two-pointer approach.
+
+- Core Mechanism: After fixing one element, two pointers (left and right) are used to find the other two elements.
+This reduces the complexity from `O(n^3)` (brute force) to `O(n^2)`, by converting the problem into a series of two-sum problems.
+
+- Duplication Check: To avoid adding duplicate triplets, the algorithm skips over repeated elements by carefully advancing 
+the initial pointer and the two moving pointers whenever a solution or a duplicate value is encountered.
+
+- Result Compilation: Unique triplets that sum to zero are collected. The sorting of the input array and the careful moving of pointers ensure that each triplet is added only once.
+
+
+

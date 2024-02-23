@@ -1,0 +1,53 @@
+// In Java:
+public static int minMeetingRooms(int[][] intervals) {
+        ArrayList<int[]> myList = new ArrayList<>();
+        myList.add(intervals[0]);
+
+        for (int i = 1; i < intervals.length; i++) {
+            boolean canAssign = false;
+            for (int[] meeting : myList) {
+                if (intervals[i][0] >= meeting[1]) {
+                    meeting[1] = intervals[i][1];
+                    canAssign = true;
+                    break;
+                }
+            }
+            if (!canAssign) {
+                myList.add(intervals[i]);
+            }
+        }
+
+        return myList.size();
+    }
+********************************************************************************************************
+
+// In python:
+def minMeetingRooms(intervals: List[List[int]]) -> int:
+    if not intervals:
+        return 0
+
+    intervals.sort(key=lambda x: x[0]) 
+    merged = [intervals[0]]
+
+    for interval in intervals[1:]:
+        can_assign = False
+        for meeting in merged:
+            if interval[0] >= meeting[1]:
+                meeting[1] = interval[1]
+                can_assign = True
+                break
+        if not can_assign:
+            merged.append(interval)
+
+    return len(merged)
+*********************************************************************************************************
+High-Level Approach for 2 above code:
+- Iterate Through Intervals: Iterate through the sorted intervals one by one.
+
+- Merge Overlapping Intervals: For each interval, check if it overlaps with any existing meetings. If it does, update the end time of the overlapping meeting to accommodate the current interval. 
+If it doesn't overlap with any existing meeting, add it as a new meeting.
+
+- Count Meeting Rooms: After processing all intervals, the number of merged intervals represents the minimum number of meeting rooms required.
+
+- Return Result: Return the size of the list of merged intervals as the minimum number of meeting rooms required.
+*********************************************************************************************************

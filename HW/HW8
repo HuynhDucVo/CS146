@@ -1,0 +1,66 @@
+// In java:
+
+public static int longestPalindrome(String s) {
+        HashMap<Character, Integer> myMap = new HashMap<>();
+
+        for (char c : s.toCharArray()) {
+            if (myMap.containsKey(c)) {
+                myMap.put(c, myMap.get(c) + 1);
+            } else {
+                myMap.put(c, 1);
+            }
+        }
+        int length = 0;
+        boolean hasOdd = false;
+
+        for (int count : myMap.values()) {
+            length += (count / 2) * 2;
+            if (count % 2 != 0) {
+                hasOdd = true;
+            }
+        }
+
+        if (hasOdd) {
+            length++;
+        }
+
+        return length;
+    }
+****************************************************************
+// In python: 
+
+def longestPalindrome(s):
+    # Your code here
+    char_count = {}
+    for char in s:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+
+    length = 0
+    has_odd = False
+    for count in char_count.values():
+        length += (count // 2) * 2
+        if count % 2 != 0:
+            has_odd = True
+
+    if has_odd:
+        length += 1
+
+    return length
+******************************************************************
+## High-Level Approach
+To solve this problem, we can follow these steps:
+
+1. Count Character Occurrences: Initialize a HashMap to store the count of each character in the input string `s`. We iterate through each character in the string and update its count in the HashMap.
+
+2. Calculate Palindrome Length: We iterate through the counts of characters in the HashMap and calculate the length of the longest palindrome. For each character count:
+    - If the count is even, we add it directly to the length of the palindrome because even counts can be used as they are to form palindromes.
+    - If the count is odd, we add one less than the count to the length of the palindrome. We keep track of whether we encountered any characters with an odd count.
+
+3. Handle Odd Counts: If we encountered at least one character with an odd count, we include one character with an odd count in the palindrome, as palindromes can have at most one character with an odd count.
+
+4. Return Result**: The final length obtained after the above steps is the length of the longest palindrome that can be built from the given string `s`. We return this length as the result.
+
+

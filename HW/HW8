@@ -30,7 +30,6 @@ public static int longestPalindrome(String s) {
 // In python: 
 
 def longestPalindrome(s):
-    # Your code here
     char_count = {}
     for char in s:
         if char in char_count:
@@ -61,6 +60,6 @@ To solve this problem, we can follow these steps:
 
 3. Handle Odd Counts: If we encountered at least one character with an odd count, we include one character with an odd count in the palindrome, as palindromes can have at most one character with an odd count.
 
-4. Return Result**: The final length obtained after the above steps is the length of the longest palindrome that can be built from the given string `s`. We return this length as the result.
+4. Return Result: The final length obtained after the above steps is the length of the longest palindrome that can be built from the given string `s`. We return this length as the result.
 
 

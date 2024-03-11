@@ -1,0 +1,4 @@
+Follow-up exercise: Can you think of a way to do this iteratively?
+Yes. To invert a binary tree iteratively, we can use a queue to traverse the tree level by level (breadth-first search).
+This approach involves swapping the left and right children of each node as we traverse through the tree. 
+This iterative solution effectively inverts the binary tree without using the call stack for recursion, making it more efficient in terms of space complexity for very deep trees.

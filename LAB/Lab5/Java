@@ -1,0 +1,24 @@
+    public boolean isValidBST(TreeNode root) {
+        return isValidBSTHelper(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    private boolean isValidBSTHelper(TreeNode node, long lower, long upper) {
+        if (node == null) {
+            return true;
+        }
+        if (node.val <= lower || node.val >= upper) {
+            return false;
+        }
+
+        return isValidBSTHelper(node.left, lower, node.val) && isValidBSTHelper(node.right, node.val, upper);
+    }
+
+/*
+1) Recursive Strategy: Use recursion to traverse the tree, validating the BST property at each node.
+2) Helper Method: Implement isValidBSTHelper as a private method to assist with recursion, passing the node and its valid value range.
+3) Initial Bounds: Start with bounds Long.MIN_VALUE and Long.MAX_VALUE for the root node to cover the entire range of integer values.
+4) Checking Bounds: At each node, check if its value is within the given bounds. If not, return false.
+5) Updating Bounds: When moving to the left child, update the upper bound to the current node’s value. For the right child, update the lower bound to the current node’s value.
+6) Recursive Calls: Make recursive calls for both the left and right subtrees with updated bounds.
+7) Base Case: Return true for null nodes to indicate a valid subtree.
+*/

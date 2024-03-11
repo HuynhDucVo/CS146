@@ -1,0 +1,4 @@
+Follow-up exercise: Can you think of a way to do this iteratively?
+
+Yes, the approach described for validating a BST already employs an iterative method using a stack for in-order traversal and a prev variable
+to ensure each node's value is greater than the preceding node's value, adhering to BST properties.

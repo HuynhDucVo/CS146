@@ -1,0 +1,26 @@
+public TreeNode invertTree(TreeNode root) {
+        // Base case: if the node is null, just return null
+        if (root == null) {
+            return null;
+        }
+        
+        // Swap the left and right children
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        
+        // Recursively invert the left subtree
+        invertTree(root.left);
+        // Recursively invert the right subtree
+        invertTree(root.right);
+        
+        // Return the root of the inverted tree
+        return root;
+    }
+/*
+1) If the current node (root) is null, return null because there's nothing to invert.
+2) Swap the left and right children of the current node.
+3) Recursively call invertTree on the left child, which after swapping becomes the original right child.
+4) Recursively call invertTree on the right child, which after swapping becomes the original left child.
+5) Finally, return the current node, which is now the root of the inverted subtree.
+*/

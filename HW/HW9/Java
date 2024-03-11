@@ -1,0 +1,26 @@
+ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    if (root == null) return null;
+
+    if (p.val > root.val && q.val > root.val) {
+      return lowestCommonAncestor(root.right, p, q);
+    }
+    
+    else if (p.val < root.val && q.val < root.val) {
+      return lowestCommonAncestor(root.left, p, q);
+    }
+    
+    else return root;
+}
+
+/*
+1. Null Check: First, check if the root is `null`. If it is, the tree is empty, and hence, there is no common ancestor. The function returns `null` in this case.
+
+2. Search Right Subtree: If both `p` and `q` are greater than the value of the current node (`root.val`), it indicates that both nodes are in the right subtree of the current node. 
+Hence, we recursively search the right subtree for the LCA.
+
+3. Search Left Subtree: Conversely, if both `p` and `q` are less than the current node's value, both nodes lie in the left subtree. Thus, we recursively search the left subtree for the LCA.
+
+4. Finding the LCA: If neither of the above conditions hold, it means we have found a situation where either:
+   - One node is on the left subtree, and the other is on the right.
+   - The current node is one of the two nodes we are looking for, making it the LCA by definition since a node can be a descendant of itself.
+*/

@@ -1,1 +1,21 @@
-
+def isValidBST(self, root: TreeNode) -> bool:
+        stack, prev = [], float('-inf')
+        
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            if root.val <= prev:
+                return False
+            prev = root.val
+            root = root.right
+        
+        return True
+/* 
+1) This traversal order guarantees that if the tree is a BST, the nodes will be visited in non-decreasing order of their values.
+2) Stack for Traversal: Use a stack to iteratively traverse the tree. The stack helps in managing the traversal sequence without recursion, making the solution space-efficient.
+3) Tracking Previous Node Value: Maintain a variable (prev) to store the value of the last visited node during the traversal. 
+This variable is crucial for comparing the current node's value with the last visited node's value to ensure the BST property is upheld.
+4) Early Termination: If at any point in the traversal a node's value is not greater than the prev value, the function immediately returns False, indicating the tree is not a valid BST.
+*/

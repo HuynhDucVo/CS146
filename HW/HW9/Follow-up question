@@ -1,0 +1,13 @@
+Follow-up exercise: Can you think of a way to do this iteratively?
+
+Yes, finding the lowest common ancestor (LCA) of two nodes in a binary search tree (BST) can also be done iteratively. 
+The iterative approach leverages the BST property (all left descendants ≤ node < all right descendants) to navigate down from the root to find the split point where the paths to p and q diverge. 
+This split point is the LCA, where either p and q are on different sides of it, or one of them is the LCA itself if p or q matches the current node during the iteration.
+The iterative approach to finding the LCA in a BST has the advantage of being more space-efficient than the recursive approach, 
+as it doesn't add extra space complexity due to recursive calls stack, making it particularly useful for large trees or systems with limited stack space.
+
+
+
+
+
+

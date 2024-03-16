@@ -1,0 +1,35 @@
+ public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        levelOrderTraversal(root, 0, result);
+        return result;
+}
+public void levelOrderTraversal(TreeNode node, int level, List<List<Integer>> result) {
+        if (node == null) return;
+        
+        if (level >= result.size()) {
+            result.add(new ArrayList<Integer>());
+        }
+        
+        result.get(level).add(node.val);
+        
+        levelOrderTraversal(node.left, level + 1, result);
+        levelOrderTraversal(node.right, level + 1, result);
+}
+/*
+## Approach:
+1. Recursive Depth-First Traversal:
+    - We can use a recursive depth-first traversal approach to traverse the binary tree.
+    - The main method `levelOrder` initializes an empty list `result` to store the level order traversal.
+    - It then calls the recursive helper method `levelOrderTraversal` with the root node, current level, and the `result` list.
+  
+2. Recursive Helper Method:
+    - The recursive helper method `levelOrderTraversal` is responsible for traversing the tree in a depth-first manner.
+    - It takes three parameters: the current node being visited (`node`), the current level (`level`), and the `result` list.
+    - If the current node is null, indicating an empty subtree, the method returns immediately.
+    - If the current level exceeds the size of the `result` list, it means we have reached a new level. In this case, we add a new empty list to the `result` to store the values at this level.
+    - The value of the current node is added to the list at the current level in the `result`.
+    - The method is then recursively called for the left and right children of the current node, with the level incremented by 1 for each child.
+
+3. Result:
+    - After the `levelOrder` method completes, it returns the `result` list, which contains the level order traversal of the binary tree.
+*/

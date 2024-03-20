@@ -1,0 +1,12 @@
+1. Starting Point: Begin at the starting pixel provided by the input.
+
+2. Breadth-First Search (BFS):
+  Initialize a queue with the starting pixel.
+  While the queue is not empty:
+    Dequeue a pixel from the queue.
+    Change its color to the target color.
+    Enqueue its neighboring pixels that have the same color as the starting pixel.
+
+3. Return Modified Image: Return the modified image after the BFS process is complete.
+This approach explores pixels in a level-by-level manner, starting from the starting pixel
+and spreading out to its adjacent pixels, similar to how water would fill an area in a flood.

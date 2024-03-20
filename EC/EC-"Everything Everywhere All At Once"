@@ -1,0 +1,56 @@
+1. Convert Adjacency List to Adjacency Matrix:
+
+Pseudocode:
+function convertToListToMatrix(adjList):
+    n = length(adjList) // Number of vertices
+    matrix = createMatrix(n, n) // Initialize adjacency matrix with all zeros
+    
+    for each vertex v in adjList:
+        for each neighbor u of v in adjList[v]:
+            matrix[v][u] = 1 // Set the corresponding entry in the adjacency matrix to 1
+    
+    return matrix
+
+Explanation:
+What we do is we go through every vertex within the given adjacency list. 
+Each vertex is an iteration that runs through its list of neighbors and 
+the certain place in the adjacency matrix will be 1 for a connection between the vertices. 
+Finally, we leave with the generated adjacency matrix as well. 
+
+2. Convert Adjacency Matrix to Adjacency List:
+
+Pseudocode:
+function convertMatrixToList(matrix):
+    n = number of rows or columns in matrix
+    adjList = create empty adjacency list
+    
+    for each vertex v from 0 to n-1:
+        neighbors = empty list
+        for each vertex u from 0 to n-1:
+            if matrix[v][u] == 1:
+                add u to neighbors
+        add neighbors to adjList[v]
+    return adjList
+
+Explanation:
+We iterate through each vertex in the adjacency matrix.
+For each vertex, we iterate through its row and add its neighbors to a list if there's a connection (matrix entry is 1).
+Finally, we add this list of neighbors to the corresponding vertex in the adjacency list and return the generated adjacency list.
+
+3. Reverse Direction of Edges in Directed Graph:
+
+Pseudocode:
+function reverseEdges(graph):
+    reversedGraph = create empty graph with same number of vertices as graph
+    
+    for each vertex v in graph:
+        for each neighbor u of v in graph[v]:
+            add v to the list of neighbors of u in reversedGraph
+    return reversedGraph
+
+Explanation:
+We iterate through each vertex in the original graph.
+For each vertex, we iterate through its list of neighbors 
+and add the current vertex to the list of neighbors of each neighbor vertex.
+This effectively reverses the direction of edges in the graph.
+Finally, we return the reversed graph.

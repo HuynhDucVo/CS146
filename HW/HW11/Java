@@ -1,0 +1,31 @@
+public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        if (image[sr][sc] == color) {
+            return image;  
+        }
+        dfs(image, sr, sc, image[sr][sc], color);
+        return image;
+    }
+
+    private void dfs(int[][] image, int x, int y, int targetColor, int newColor) {
+        if (x < 0 || x >= image.length || y < 0 || y >= image[0].length || image[x][y] != targetColor) {
+            return;
+        }
+        image[x][y] = newColor;
+        dfs(image, x + 1, y, targetColor, newColor);
+        dfs(image, x - 1, y, targetColor, newColor);
+        dfs(image, x, y + 1, targetColor, newColor);
+        dfs(image, x, y - 1, targetColor, newColor);
+    }
+/*
+1. Starting Point: We begin at the starting pixel provided by the input.
+2. Depth-First Search (DFS):
+    - We define a recursive function `dfs` to perform the DFS.
+    - The `dfs` function explores adjacent pixels in four directions (up, down, left, right).
+    - For each adjacent pixel:
+        - If it has the same color as the starting pixel, we change its color to the target color and recursively call `dfs` on it.
+        - If it has a different color or is out of bounds, we skip it.
+3. Main Function:
+    - In the main function (`floodFill` in Java), we check if the starting pixel already has the target color. If so, there's no need to fill, and we return the image.
+    - Otherwise, we call the `dfs` function to start the flood fill process.
+4. Return Modified Image: Finally, we return the modified image after the flood fill process is complete.
+*/

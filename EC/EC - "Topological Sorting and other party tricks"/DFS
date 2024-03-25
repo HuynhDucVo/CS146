@@ -1,0 +1,47 @@
+/* 
+DFS Approach involves recursively visiting nodes, ensuring all dependencies are processed first
+, and then adding the node to the result list in reverse order.
+*/
+
+import java.util.*;
+
+public class TopologicalSortDFS {
+    static void dfs(int node, boolean[] visited, Stack<Integer> stack, ArrayList<ArrayList<Integer>> adj) {
+        visited[node] = true;
+        for (int neighbour : adj.get(node)) {
+            if (!visited[neighbour]) {
+                dfs(neighbour, visited, stack, adj);
+            }
+        }
+        stack.push(node);
+    }
+
+    static void topologicalSort(int vertices, ArrayList<ArrayList<Integer>> adj) {
+        Stack<Integer> stack = new Stack<>();
+        boolean[] visited = new boolean[vertices];
+        for (int i = 0; i < vertices; i++) {
+            if (!visited[i]) {
+                dfs(i, visited, stack, adj);
+            }
+        }
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() + " ");
+        }
+    }
+}
+
+/* 
+## DFS Approach
+
+1. Initialization: A boolean array `visited[]` is used to keep track of visited nodes to avoid re-processing a node.
+A `Stack<Integer> stack` is used to store the order of nodes respecting their dependencies.
+
+2. Perform DFS: For every unvisited node, perform a Depth-First Search (DFS):
+   - Mark the current node as visited.
+   - Recursively visit all the adjacent and unvisited nodes.
+   - After visiting all adjacent nodes (i.e., no more nodes to visit from the current node), push the current node to the stack. 
+This step ensures that all dependencies of a node are processed before the node itself.
+
+3. Build Topological Order: Pop all elements from the stack and print them. The order in which elements are popped is the topological order of the graph.
+
+*/

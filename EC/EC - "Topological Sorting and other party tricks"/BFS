@@ -1,0 +1,48 @@
+// The BFS approach is similar to Kahn's Algorithm but framed explicitly in BFS terms.
+
+public class TopologicalSortBFS {
+    static List<Integer> topologicalSort(int vertices, List<List<Integer>> adj) {
+        // Array to store the in-degree (number of incoming edges) for each node
+        int[] inDegree = new int[vertices];
+
+        // Calculate in-degrees of all nodes
+        for (int i = 0; i < vertices; i++) {
+            for (int node : adj.get(i)) {
+                inDegree[node]++;
+            }
+        }
+
+        // Queue to store nodes with in-degree of 0
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < vertices; i++) {
+            if (inDegree[i] == 0) {
+                queue.add(i);
+            }
+        }
+
+        // List to store the result of the topological sort
+        List<Integer> topOrder = new ArrayList<>();
+        
+        // Perform BFS
+        while (!queue.isEmpty()) {
+            int curr = queue.poll();
+            topOrder.add(curr);
+
+            // Reduce the in-degree of adjacent nodes by 1
+            for (int neighbor : adj.get(curr)) {
+                inDegree[neighbor]--;
+
+                // If in-degree becomes 0, add it to the queue
+                if (inDegree[neighbor] == 0) {
+                    queue.add(neighbor);
+                }
+            }
+        }
+
+        // Check if there was a cycle
+        if (topOrder.size() != vertices) {
+            throw new IllegalArgumentException("The graph has at least one cycle, so a topological sort is not possible.");
+        }
+
+        return topOrder;
+    }

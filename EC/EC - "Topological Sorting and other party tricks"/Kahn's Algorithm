@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class TopologicalSortKahn {
+    static void topologicalSort(int vertices, ArrayList<ArrayList<Integer>> adj) {
+        int[] inDegree = new int[vertices];
+        for (int i = 0; i < vertices; i++) {
+            for (int node : adj.get(i)) {
+                inDegree[node]++;
+            }
+        }
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 0; i < vertices; i++) {
+            if (inDegree[i] == 0) {
+                q.add(i);
+            }
+        }
+        while (!q.isEmpty()) {
+            int curr = q.poll();
+            System.out.print(curr + " ");
+            for (int node : adj.get(curr)) {
+                inDegree[node]--;
+                if (inDegree[node] == 0) {
+                    q.add(node);
+                }
+            }
+        }
+    }
+}
+
+/* 
+Kahn's Algorithm involves repeatedly removing nodes with no incoming edges and removing all edges from these nodes to other nodes.
+*/

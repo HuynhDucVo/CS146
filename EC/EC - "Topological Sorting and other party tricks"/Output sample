@@ -1,0 +1,19 @@
+Let's consider a graph with 6 vertices (0 to 5) and edges (5 -> 2), (5 -> 0), (4 -> 0), (4 -> 1), (2 -> 3), (3 -> 1).
+
+The graph consists of 6 vertices (0 to 5) and edges as follows:
+5 -> 2
+5 -> 0
+4 -> 0
+4 -> 1
+2 -> 3
+3 -> 1
+
+For the given graph, one possible topological sort could be:
+4, 5, 0, 2, 3, 1
+
+Explain: 
+Vertex 4 and 5 don't have any incoming edges and can be placed at the beginning.
+After removing edges coming from 4 and 5, vertex 0 has no incoming edges, so it comes next.
+Then, removing all edges from 4, 5, and 0, vertex 2 becomes the next vertex with no incoming edges.
+Following 2, the removal of its edges makes vertex 3 the next in line with no incoming edges.
+Finally, vertex 1 is the last, as it now has no incoming edges.

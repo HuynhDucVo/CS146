@@ -1,0 +1,58 @@
+public boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < numCourses; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        int[] inDegree = new int[numCourses];
+
+        for (int[] prerequisite : prerequisites) {
+            graph.get(prerequisite[1]).add(prerequisite[0]);
+            inDegree[prerequisite[0]]++;
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+
+        for (int i = 0; i < numCourses; i++) {
+            if (inDegree[i] == 0) {
+                queue.add(i);
+            }
+        }
+        
+        int count = 0; 
+  
+        while (!queue.isEmpty()) {
+            int course = queue.poll();
+            count++;
+            
+            for (int nextCourse : graph.get(course)) {
+                inDegree[nextCourse]--;
+                if (inDegree[nextCourse] == 0) {
+                    queue.add(nextCourse);
+                }
+            }
+        }
+
+        return count == numCourses;
+    }
+
+/* 
+1: Graph Representation
+Represent the courses and their prerequisites as a directed graph. Each course is a vertex, 
+and a prerequisite relationship `[ai, bi]` represents a directed edge from `bi` to `ai`. 
+This graph is stored as an adjacency list for efficient traversal.
+
+2: Calculate In-Degrees
+For each course, calculate its in-degree, which is the number of prerequisite courses required.
+This is done by iterating through the prerequisites array and incrementing the in-degree for each course `ai` whenever a prerequisite pair `[ai, bi]` is found.
+
+3: Queue Initialization
+Initialize a queue to store courses with zero in-degree, meaning these courses do not have any prerequisites and can be taken immediately.
+
+4: Process Courses
+Process each course in the queue as follows:
+- Dequeue a course and consider it as completed.
+- For each of its dependent courses (i.e., courses that require it as a prerequisite), decrement their in-degree by 1.
+- If a course's in-degree becomes zero, enqueue it, indicating it's now free of prerequisites and can be taken.
+
+*/

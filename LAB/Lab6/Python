@@ -1,0 +1,35 @@
+def canFinish(numCourses, prerequisites):
+    graph = [[] for _ in range(numCourses)]
+    inDegree = [0] * numCourses
+
+    for dest, src in prerequisites:
+        graph[src].append(dest)
+        inDegree[dest] += 1
+
+    queue = deque([i for i in range(numCourses) if inDegree[i] == 0])
+
+    count = 0
+
+    while queue:
+        course = queue.popleft()
+        count += 1  
+
+        for neighbor in graph[course]:
+            inDegree[neighbor] -= 1
+            if inDegree[neighbor] == 0:
+                queue.append(neighbor)
+
+    return count == numCourses
+
+/*
+1. Graph Representation: Use an adjacency list to represent the graph, where each node (course) points to the list of courses dependent on it.
+
+2. In-Degree Calculation: Calculate the in-degree for each course. The in-degree represents the number of prerequisites for each course.
+
+3. Queue Initialization: Initialize a queue with courses that have an in-degree of 0, meaning they have no prerequisites and can be taken immediately.
+
+4. Breadth-First Search (BFS: Perform a BFS to process courses in the order they can be completed, reducing the in-degree of dependent courses as prerequisites are met.
+
+5. Completion Check: If all courses can be processed (i.e., the queue empties and the number of processed courses equals the total number of courses), return True. Otherwise, return False.
+
+*/

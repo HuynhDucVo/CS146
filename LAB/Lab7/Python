@@ -1,0 +1,49 @@
+def findTheCity(self, n: int, edges: List[List[int]], distanceThreshold: int) -> int:
+        # Initialize adjacency matrix
+        distance = []
+        for i in range(n):
+            row = [float('inf')] * n
+            distance.append(row)
+        
+        # Fill adjacency matrix with edge weights
+        for edge in edges:
+            from_city, to_city, weight = edge
+            distance[from_city][to_city] = weight
+            distance[to_city][from_city] = weight  # Since it's bidirectional
+        
+        # Floyd-Warshall Algorithm to find all pair shortest paths
+        for k in range(n):
+            for i in range(n):
+                for j in range(n):
+                    distance[i][j] = min(distance[i][j], distance[i][k] + distance[k][j])
+        
+        # Find the city with the smallest number of reachable cities within distanceThreshold
+        min_cities = n
+        result = -1
+        for i in range(n):
+            reachable_cities = sum(distance[i][j] <= distanceThreshold for j in range(n))
+            if reachable_cities <= min_cities:
+                min_cities = reachable_cities
+                result = i
+        
+        return result
+
+-----------------------------------------------------------
+1. Building Adjacency Matrix:
+Initialize an adjacency matrix to represent the graph.
+Fill the matrix with edge weights between cities.
+
+2. Floyd-Warshall Algorithm:
+Use Floyd-Warshall algorithm to compute shortest distances between all pairs of cities.
+Update the matrix with shortest distances.
+
+3. Finding Reachable Cities:
+Iterate through each city.
+Count the number of cities that are reachable from the current city within the given distance threshold.
+
+4. Selecting the City:
+Keep track of the city with the smallest number of reachable cities.
+If there are multiple cities with the same number of reachable cities, select the one with the greatest number.
+
+5. Returning the Result:
+Return the selected city as the result.

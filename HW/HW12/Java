@@ -1,0 +1,72 @@
+   public static int minCostToSupplyWater(int n, int[] wells, int[][] pipes) {
+        // Create a list to store all edges, including virtual edges from a new node (0) to each house with the cost of the wells
+        List<int[]> edges = new ArrayList<>();
+        for (int i = 0; i < wells.length; i++) {
+            edges.add(new int[]{0, i + 1, wells[i]});  // Connect virtual node 0 to house i+1 with cost wells[i]
+        }
+
+        // Add all the pipe connections to the list of edges
+        for (int[] pipe : pipes) {
+            edges.add(new int[]{pipe[0], pipe[1], pipe[2]});
+        }
+
+        // Sort edges based on the cost using a lambda comparator
+        Collections.sort(edges, (a, b) -> a[2] - b[2]);
+
+        // Initialize Union-Find structure to manage connected components
+        int[] parent = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
+            parent[i] = i; // Each node is initially its own parent
+        }
+
+        // Kruskal's algorithm to find the minimum cost to connect all nodes
+        int cost = 0;
+        for (int[] edge : edges) {
+            if (union(edge[0], edge[1], parent)) {
+                cost += edge[2];  // If union was successful (no cycle), add the cost
+            }
+        }
+
+        return cost;
+    }
+
+    private static int find(int x, int[] parent) {
+        if (x != parent[x]) {
+            parent[x] = find(parent[x], parent); 
+        }
+        return parent[x];
+    }
+
+    private static boolean union(int x, int y, int[] parent) {
+        int rootX = find(x, parent);
+        int rootY = find(y, parent);
+
+        if (rootX != rootY) {
+            parent[rootY] = rootX;  // Union: attach one tree under another
+            return true;
+        }
+        return false;  // x and y are already in the same set
+    }
+
+/* 
+1. Creating Edges:
+Initialize a list to store all edges, including virtual edges from a new node (0) to each house with the cost of the wells.
+Each edge is represented as an array containing three elements: [from, to, cost].
+For each house, connect it to the virtual node 0 with the cost of the well.
+Add all the pipe connections to the list of edges.
+
+2. Sorting Edges:
+Sort the edges based on the cost using a lambda comparator. This is crucial for Kruskal's algorithm to pick the edges with the lowest cost first.
+
+3.Union-Find Structure Initialization:
+Initialize a Union-Find data structure to manage connected components.
+Each node is initially its own parent.
+
+4. Kruskal's Algorithm:
+Iterate through the sorted edges.
+For each edge, check if adding it creates a cycle in the graph using the Union-Find structure.
+If adding the edge doesn't create a cycle, union the two sets and add the cost of the edge to the total cost.
+
+5. Returning Minimum Cost:
+Return the accumulated cost, which represents the minimum cost to supply water to all houses.
+*/

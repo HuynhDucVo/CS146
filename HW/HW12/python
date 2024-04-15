@@ -1,1 +1,37 @@
+def minCostToSupplyWater(self, n: int, wells: List[int], pipes: List[List[int]]) -> int:
+        # Create a list to store all edges, including virtual edges from a new node (0) to each house with the cost of the wells
+        edges = []
+        for i in range(len(wells)):
+            edges.append([0, i + 1, wells[i]])  # Connect virtual node 0 to house i+1 with cost wells[i]
 
+        # Add all the pipe connections to the list of edges
+        for pipe in pipes:
+            edges.append(pipe)
+
+        # Sort edges based on the cost
+        edges.sort(key=lambda x: x[2])
+
+        # Initialize Union-Find structure to manage connected components
+        parent = list(range(n + 1))
+
+        # Kruskal's algorithm to find the minimum cost to connect all nodes
+        def find(x, parent):
+            if x != parent[x]:
+                parent[x] = find(parent[x], parent)
+            return parent[x]
+
+        def union(x, y, parent):
+            rootX = find(x, parent)
+            rootY = find(y, parent)
+
+            if rootX != rootY:
+                parent[rootY] = rootX  # Union: attach one tree under another
+                return True
+            return False  # x and y are already in the same set
+
+        cost = 0
+        for edge in edges:
+            if union(edge[0], edge[1], parent):
+                cost += edge[2]  # If union was successful (no cycle), add the cost
+
+        return cost

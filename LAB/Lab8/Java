@@ -1,0 +1,43 @@
+public int coinChange(int[] coins, int amount) {
+    int MAX = amount + 1; 
+    int[] dp = new int[amount + 1];
+  
+    dp[0] = 0;
+    for (int i = 1; i <= amount; i++) {
+        dp[i] = MAX;
+    }
+  
+    for (int i = 1; i <= amount; i++) {
+        for (int coin : coins) {
+            if (i >= coin) {
+                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+            }
+        }
+    }
+
+    return dp[amount] == MAX ? -1 : dp[amount];
+}
+
+/*
+
+1. Define the State:
+    - Create an array `dp` where `dp[i]` will hold the minimum number of coins needed to make up the amount `i`.
+
+2. Initialization:
+    - Set `dp[0] = 0` because no coins are needed to make the amount 0.
+    - Initialize all other `dp` values with a large number (`amount + 1`), which acts as a placeholder to indicate that these amounts are initially considered unreachable.
+
+3. Filling the DP Table:
+    - Iterate over each amount from `1` to `amount`.
+    - For each amount, iterate through each coin denomination.
+    - Update `dp[i]` using the formula:
+      ```
+      dp[i] = min(dp[i], dp[i - coin] + 1)
+      ```
+      provided `i` is greater than or equal to `coin`. This formula checks if using the `coin` could result in a smaller combination than what is currently known.
+
+4. Extract the Result:
+    - After filling the DP table, `dp[amount]` will hold the minimum number of coins needed for the `amount`.
+    - If `dp[amount]` is still set to `amount + 1`, it means no valid combination was found, hence return `-1`.
+
+*/
